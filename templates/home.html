@@ -23,6 +23,9 @@
             <div class="items-grid">
                 {% for item in items %}
                 <div class="item-card">
+                    {% if item.image_filename %}
+                    <img src="{{ url_for('static', filename='uploads/' + item.image_filename) }}" alt="{{ item.title }}" class="item-image">
+                    {% endif %}
                     <h3>{{ item.title }}</h3>
                     <p><strong>Category:</strong> {{ item.category }}</p>
                     <p><strong>Location:</strong> {{ item.location }}</p>
