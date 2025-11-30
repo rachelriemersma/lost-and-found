@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Success - Campus Lost & Found</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Campus Lost & Found</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('post_item') }}">Post Item</a>
+            <a href="{{ url_for('delete_item') }}">Mark as Found</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="success-message">
+            <h2>✓ Item Posted Successfully!</h2>
+            <p>Your item has been posted to the Lost & Found.</p>
+            
+            <div class="deletion-code-box">
+                <h3>Important: Save Your Deletion Code</h3>
+                <p>Use this code to mark your item as found and remove it later:</p>
+                <div class="code-display">{{ deletion_code }}</div>
+                <p class="warning">Please save this code! You won't be able to see it again.</p>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="{{ url_for('item_detail', item_id=item_id) }}" class="btn">View Your Post</a>
+                <a href="{{ url_for('home') }}" class="btn btn-secondary">Back to Home</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
