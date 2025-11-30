@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Public+Sans:wght@400;500;600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,16 +7,23 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Public Sans', sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
+    background-color: #f5f5f5;
 }
 
 header {
-    background-color: #333;
+    background-color: #6d1e3c;
     color: white;
-    padding: 1rem;
+    padding: 2rem 1rem;
     text-align: center;
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 nav {
@@ -24,96 +33,149 @@ nav {
 nav a {
     color: white;
     text-decoration: none;
-    margin: 0 1rem;
-    padding: 0.5rem 1rem;
-    background-color: #555;
-    border-radius: 4px;
+    margin: 0 1.5rem;
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: opacity 0.3s;
 }
 
 nav a:hover {
-    background-color: #777;
+    opacity: 0.8;
 }
 
 main {
     max-width: 1200px;
     margin: 2rem auto;
-    padding: 0 1rem;
+    padding: 0 2rem;
 }
 
 h2 {
+    font-family: 'Montserrat', sans-serif;
     margin-bottom: 1.5rem;
     color: #333;
 }
 
 .items-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
 }
 
 .item-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background: #d1cfcf;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.item-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.item-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background-color: #e8e8e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-card-content {
+    padding: 2.5rem;
 }
 
 .item-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
     color: #333;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+.item-card p {
+    color: #666;
+    font-size: 0.9rem;
     margin-bottom: 0.5rem;
+    font-family: 'Public Sans', sans-serif;
+}
+
+.item-card p strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.date {
+    color: #999;
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
 }
 
 .item-card a {
     display: inline-block;
     margin-top: 1rem;
-    color: #007bff;
+    color: #5b4eb8;
     text-decoration: none;
+    font-weight: 500;
+    font-family: 'Public Sans', sans-serif;
 }
 
 .item-card a:hover {
     text-decoration: underline;
 }
 
-.date {
-    color: #666;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-}
-
 form {
     background: white;
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 12px;
     max-width: 600px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 label {
     display: block;
     margin-top: 1rem;
-    font-weight: bold;
+    font-weight: 600;
     color: #333;
+    font-family: 'Public Sans', sans-serif;
 }
 
 input, textarea, select {
     width: 100%;
-    padding: 0.5rem;
-    margin-top: 0.25rem;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-family: 'Public Sans', sans-serif;
+    font-size: 1rem;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #6d1e3c;
 }
 
 button {
-    background-color: #007bff;
+    background-color: #6d1e3c;
     color: white;
-    padding: 0.75rem 1.5rem;
+    padding: 0.875rem 2rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #541730;
 }
 
 .cancel-btn {
@@ -121,120 +183,20 @@ button:hover {
     margin-left: 1rem;
     color: #666;
     text-decoration: none;
+    font-family: 'Public Sans', sans-serif;
 }
 
 .item-detail {
     background: white;
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 12px;
     max-width: 800px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.success-message {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    max-width: 600px;
-    text-align: center;
-}
-
-.success-message h2 {
-    color: #28a745;
-    margin-bottom: 1rem;
-}
-
-.deletion-code-box {
-    background: #f8f9fa;
-    border: 2px solid #007bff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin: 2rem 0;
-}
-
-.deletion-code-box h3 {
-    color: #333;
-    margin-bottom: 0.5rem;
-}
-
-.code-display {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #007bff;
-    background: white;
-    padding: 1rem;
-    border-radius: 4px;
-    margin: 1rem 0;
-    letter-spacing: 0.3rem;
-    font-family: monospace;
-}
-
-.warning {
-    color: #856404;
-    background: #fff3cd;
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-top: 1rem;
-    font-weight: bold;
-}
-
-.action-buttons {
-    margin-top: 2rem;
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-}
-
-.btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-}
-
-.btn:hover {
-    background-color: #0056b3;
-}
-
-.btn-secondary {
-    background-color: #6c757d;
-}
-
-.btn-secondary:hover {
-    background-color: #545b62;
-}
-
-.alert {
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-    max-width: 600px;
-}
-
-.alert-success {
-    background: #d4edda;
-    border: 1px solid #c3e6cb;
-    color: #155724;
-}
-
-.alert-error {
-    background: #f8d7da;
-    border: 1px solid #f5c6cb;
-    color: #721c24;
-}
-
-.helper-text {
-    font-size: 0.85rem;
-    color: #666;
-    margin-top: 0.25rem;
-    font-style: italic;
-}
-.item-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
+.item-detail h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
     margin-bottom: 1rem;
 }
 
@@ -242,10 +204,5 @@ button:hover {
     width: 100%;
     max-width: 600px;
     height: auto;
-    border-radius: 8px;
-    margin: 1rem 0;
-}
-
-input[type="file"] {
-    padding: 0.5rem 0;
-}
+    border-radius: 8;
+}    
