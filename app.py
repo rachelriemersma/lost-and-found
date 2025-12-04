@@ -7,13 +7,19 @@ import os
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key-change-this-in-production'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///lost_and_found.db'
+
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-change-in-production')
+
+database_url = os.environ.get('DATABASE_URL', 'sqlite:///lost_and_found.db')
+
+if database_url.startswith('postgres://'):
+    database_url = database_url.replace('postgres://', 'postgresql://', 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
-# Create upload folder if it doesn't exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -27,7 +33,6 @@ def generate_deletion_code():
     """Generate a random 6-character code for item deletion"""
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
 
-# Database Model
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
@@ -52,13 +57,11 @@ def post_item():
     if request.method == 'POST':
         deletion_code = generate_deletion_code()
         
-        # Handle image upload
         image_filename = None
         if 'image' in request.files:
             file = request.files['image']
             if file and file.filename != '' and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                # Add timestamp to filename to make it unique
                 timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
                 filename = f"{timestamp}_{filename}"
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -76,7 +79,6 @@ def post_item():
         db.session.add(item)
         db.session.commit()
         
-        # Store the deletion code in session to show it to the user
         session['last_deletion_code'] = deletion_code
         session['last_item_id'] = item.id
         
@@ -92,7 +94,6 @@ def post_success():
     if not deletion_code or not item_id:
         return redirect(url_for('home'))
     
-    # Clear session after displaying
     session.pop('last_deletion_code', None)
     session.pop('last_item_id', None)
     
@@ -107,7 +108,6 @@ def delete_item():
         item = Item.query.get(item_id)
         
         if item and item.deletion_code == deletion_code:
-            # Delete image file if it exists
             if item.image_filename:
                 image_path = os.path.join(app.config['UPLOAD_FOLDER'], item.image_filename)
                 if os.path.exists(image_path):
@@ -128,7 +128,9 @@ def item_detail(item_id):
     item = Item.query.get_or_404(item_id)
     return render_template('item_detail.html', item=item)
 
+# Create tables on startup
+with app.app_context():
+    db.create_all()
+
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
