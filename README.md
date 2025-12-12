@@ -82,6 +82,29 @@ timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
 filename = f"{timestamp}_{secure_filename(original_name)}"
 ```
 
+
+## Planned Enhancements and Future Work
+
+The current implementation focuses on delivering core Lost & Found functionality in a clear and reliable manner. The following enhancements were identified during development but were not completed within the scope of this project:
+
+### 1. User Authentication (Login & Registration)
+Adding user accounts would allow posters to authenticate themselves and manage their own listings. This would enable features such as editing posts, viewing posting history, and improved ownership validation beyond deletion codes.
+
+### 2. API Endpoints for Mobile Integration
+Developing RESTful API endpoints would allow the backend to support mobile applications or third-party clients. This would make the system more extensible and enable cross-platform access.
+
+### 3. Database Migration and Scalability Support
+The project currently uses SQLite for simplicity and ease of setup. Future versions could support more scalable database systems such as PostgreSQL or MySQL, along with database migration tooling to manage schema changes in production environments.
+
+### 4. Expanded Automated Testing
+While basic automated tests are included, the test suite could be expanded to cover additional routes, edge cases, and error conditions. Increased test coverage would improve long-term reliability and maintainability.
+
+### 5. Pagination and Tagging for Item Searches
+As the number of posted items grows, pagination would improve performance and usability. Adding tags or advanced filtering (e.g., by category or location) would further enhance the browsing and search experience.
+
+These planned enhancements represent logical next steps for extending the project and improving its usability, scalability, and robustness.
+
+
 ## Database Schema
 ```sql
 Table: item
